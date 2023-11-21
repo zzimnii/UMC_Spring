@@ -12,6 +12,7 @@ import umc.spring.domain.mapping.MemberPrefer;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -52,6 +53,10 @@ public class Member extends BaseEntity {
 
     private Integer point;
 
+    private Date birth;
+
+    private String password;
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberAgree> memberAgreeList = new ArrayList<>();
 
@@ -63,4 +68,7 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Question> questionList = new ArrayList<>();
 }
