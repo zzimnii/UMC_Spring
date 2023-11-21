@@ -20,7 +20,9 @@ public class Terms extends BaseEntity {
     private Long id;
 
     private String title;
+
     private String body;
+
     private Boolean optional;
 
     @OneToMany(mappedBy = "terms", cascade = CascadeType.ALL)

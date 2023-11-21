@@ -8,6 +8,7 @@ import umc.spring.domain.enums.MissionStatus;
 
 import javax.persistence.*;
 
+
 @Entity
 @Getter
 @Builder
