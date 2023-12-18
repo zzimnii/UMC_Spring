@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 public class StoreConverter {
 
-    public static StoreResponseDTO.JoinResultDTO joinResultDTO(Store store) {
-        return StoreResponseDTO.JoinResultDTO.builder()
+    public static StoreResponseDTO.StoreResultDTO storeResultDTO(Store store) {
+        return StoreResponseDTO.StoreResultDTO.builder()
                 .storeId(store.getId())
                 .createdAt(LocalDateTime.now())
                 .build();
     }
 
-    public static Store toStore(StoreRequestDTO.JoinDto request) {
+    public static Store toStore(StoreRequestDTO.StoreDto request) {
         return Store.builder()
                 .name(request.getName())
                 .score(request.getScore())

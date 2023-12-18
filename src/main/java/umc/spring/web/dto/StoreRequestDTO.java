@@ -10,7 +10,7 @@ import java.util.List;
 public class StoreRequestDTO {
 
     @Getter
-    public static class JoinDto{
+    public static class StoreDto{
         @NotBlank
         String name;
         @Size(min=5, max=12)
@@ -19,5 +19,15 @@ public class StoreRequestDTO {
         Float score;
 //        @NotNull
         List<Long> reviewList;
+    }
+
+    @Getter
+    public static class ReviewDto {
+        @NotBlank
+        String title;
+        @NotNull
+        Float score;
+        @NotBlank
+        String content;
     }
 }
