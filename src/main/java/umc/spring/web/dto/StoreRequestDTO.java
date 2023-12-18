@@ -5,6 +5,7 @@ import lombok.Getter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.List;
 
 public class StoreRequestDTO {
@@ -29,5 +30,17 @@ public class StoreRequestDTO {
         Float score;
         @NotBlank
         String content;
+    }
+
+    @Getter
+    public static class MissionDto{
+        @NotNull
+        private Integer reward;
+        @NotNull
+        private Integer price;
+        @NotNull
+        private LocalDate deadline;
+        @NotNull
+        private String missionSpec;
     }
 }
