@@ -13,8 +13,6 @@ import java.lang.annotation.*;
 
 public @interface ExistMembers {
     String message() default "유저가 존재하지 않습니다.";
-
     Class<?>[] groups() default {};
-
     Class<? extends Payload>[] payload() default {};
 }

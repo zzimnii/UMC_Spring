@@ -36,7 +36,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     private final MemberMissionRepository memberMissionRepository;
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Member joinMember(MemberRequestDTO.JoinDto request) {
 
         Member newMember = MemberConverter.toMember(request);
@@ -56,7 +56,6 @@ public class MemberCommandServiceImpl implements MemberCommandService {
         MemberMission memberMission = MemberMission.builder()
                 .status(MissionStatus.CHALLENGING)
                 .build();
-        System.out.println("변경");
         memberMission.setMember(memberRepository.findById(memberId).get());
         memberMission.setMission(missionRepository.findById(missionId).get());
         return memberMissionRepository.save(memberMission);

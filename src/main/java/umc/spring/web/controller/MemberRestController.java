@@ -28,8 +28,8 @@ public class MemberRestController {
         return ApiResponse.onSuccess(MemberConverter.toJoinResultDTO(member));
     }
 
-    @PostMapping("/{missionId}/mission")
-    public ApiResponse<MemberResponseDTO.MemberMissionResultDTO> doMemberMission(@ExistMissions @PathVariable(name = "missionId") Long missionId,
+    @PostMapping("/mission")
+    public ApiResponse<MemberResponseDTO.MemberMissionResultDTO> doMemberMission(@ExistMissions @RequestParam(name = "missionId") Long missionId,
                                                                                  @ExistMembers @RequestParam(name = "memberId") Long memberId){
         MemberMission memberMission = memberCommandService.createMemberMission(missionId, memberId);
         return ApiResponse.onSuccess(MemberMissionConverter.toCreateMemberMissionResultDTO(memberMission));
