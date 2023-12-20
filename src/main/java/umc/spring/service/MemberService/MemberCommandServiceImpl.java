@@ -9,9 +9,14 @@ import umc.spring.converter.MemberConverter;
 import umc.spring.converter.MemberPreferConverter;
 import umc.spring.domain.FoodCategory;
 import umc.spring.domain.Member;
+import umc.spring.domain.Mission;
+import umc.spring.domain.enums.MissionStatus;
+import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.MemberPrefer;
 import umc.spring.repository.FoodCategoryRepository;
+import umc.spring.repository.MemberMissionRepository;
 import umc.spring.repository.MemberRepository;
+import umc.spring.repository.MissionRepository;
 import umc.spring.web.dto.MemberRequestDTO;
 
 import java.util.List;
@@ -19,15 +24,19 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class MemberCommandServiceImpl implements MemberCommandService {
 
     private final MemberRepository memberRepository;
 
     private final FoodCategoryRepository foodCategoryRepository;
 
+    private final MissionRepository missionRepository;
+
+    private final MemberMissionRepository memberMissionRepository;
+
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Member joinMember(MemberRequestDTO.JoinDto request) {
 
         Member newMember = MemberConverter.toMember(request);
@@ -40,5 +49,16 @@ public class MemberCommandServiceImpl implements MemberCommandService {
         memberPreferList.forEach(memberPrefer -> {memberPrefer.setMember(newMember);});
 
         return memberRepository.save(newMember);
+    }
+
+    @Override
+    public MemberMission createMemberMission(Long missionId, Long memberId) {
+        MemberMission memberMission = MemberMission.builder()
+                .status(MissionStatus.CHALLENGING)
+                .build();
+        System.out.println("변경");
+        memberMission.setMember(memberRepository.findById(memberId).get());
+        memberMission.setMission(missionRepository.findById(missionId).get());
+        return memberMissionRepository.save(memberMission);
     }
 }

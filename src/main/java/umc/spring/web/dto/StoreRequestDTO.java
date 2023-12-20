@@ -18,7 +18,6 @@ public class StoreRequestDTO {
         String address;
         @NotNull
         Float score;
-//        @NotNull
         List<Long> reviewList;
     }
 
@@ -42,5 +41,11 @@ public class StoreRequestDTO {
         private LocalDate deadline;
         @NotNull
         private String missionSpec;
+    }
+
+    @Getter
+    public static class ChallengeMissionDTO{
+        @NotBlank
+        Long id;
     }
 }

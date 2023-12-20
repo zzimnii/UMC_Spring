@@ -11,6 +11,7 @@ import umc.spring.domain.Review;
 import umc.spring.domain.Store;
 import umc.spring.service.StoreService.StoreCommandService;
 import umc.spring.validation.annotation.ExistMembers;
+import umc.spring.validation.annotation.ExistRegion;
 import umc.spring.validation.annotation.ExistStores;
 import umc.spring.web.dto.StoreRequestDTO;
 import umc.spring.web.dto.StoreResponseDTO;
@@ -25,8 +26,9 @@ public class StoreRestController {
     private final StoreCommandService storeCommandService;
 
     @PostMapping("/join")
-    public ApiResponse<StoreResponseDTO.StoreResultDTO> store(@RequestBody @Valid StoreRequestDTO.StoreDto request) {
-        Store store = storeCommandService.joinStore(request);
+    public ApiResponse<StoreResponseDTO.StoreResultDTO> store(@RequestBody @Valid StoreRequestDTO.StoreDto request,
+                                                              @ExistRegion @RequestParam(name="regionId") Long regionId) {
+        Store store = storeCommandService.joinStore(regionId, request);
         return ApiResponse.onSuccess(StoreConverter.storeResultDTO(store));
     }
 

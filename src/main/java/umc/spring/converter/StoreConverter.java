@@ -20,7 +20,7 @@ public class StoreConverter {
         return Store.builder()
                 .name(request.getName())
                 .score(request.getScore())
-//                .region(request.getRegion())
+                .address(request.getAddress())
                 .reviewList(new ArrayList<>())
                 .build();
     }

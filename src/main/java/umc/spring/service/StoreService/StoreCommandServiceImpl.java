@@ -9,10 +9,7 @@ import umc.spring.converter.StoreReviewConverter;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
 import umc.spring.domain.Store;
-import umc.spring.repository.MemberRepository;
-import umc.spring.repository.MissionRepository;
-import umc.spring.repository.ReviewRepository;
-import umc.spring.repository.StoreRepository;
+import umc.spring.repository.*;
 import umc.spring.web.dto.StoreRequestDTO;
 
 
@@ -21,6 +18,7 @@ import umc.spring.web.dto.StoreRequestDTO;
 @Transactional
 public class StoreCommandServiceImpl implements StoreCommandService {
 
+    private final RegionRepository regionRepository;
     private final StoreRepository storeRepository;
     private final ReviewRepository reviewRepository;
     private final MemberRepository memberRepository;
@@ -28,9 +26,10 @@ public class StoreCommandServiceImpl implements StoreCommandService {
 
     @Override
     @Transactional
-    public Store joinStore(StoreRequestDTO.StoreDto request) {
+    public Store joinStore(Long regionId, StoreRequestDTO.StoreDto request) {
         Store newStore = StoreConverter.toStore(request);
 
+        newStore.setRegion(regionRepository.findById(regionId).get());
         return storeRepository.save(newStore);
     }
 
@@ -51,6 +50,7 @@ public class StoreCommandServiceImpl implements StoreCommandService {
         newMission.setStore(storeRepository.findById(storeId).get());
 
         return missionRepository.save(newMission);
-
     }
+
+
 }
