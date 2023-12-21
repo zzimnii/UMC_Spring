@@ -1,7 +1,6 @@
 package umc.spring.validation.annotation;
 
 import umc.spring.validation.validator.MissionExistValidator;
-import umc.spring.validation.validator.RegionsExistValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

@@ -9,7 +9,6 @@ import umc.spring.converter.MemberConverter;
 import umc.spring.converter.MemberPreferConverter;
 import umc.spring.domain.FoodCategory;
 import umc.spring.domain.Member;
-import umc.spring.domain.Mission;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.MemberPrefer;
@@ -52,7 +51,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     }
 
     @Override
-    public MemberMission createMemberMission(Long missionId, Long memberId) {
+    public MemberMission createMemberMission(Long missionId, Long memberId, MemberRequestDTO.ChallengeMissionDto request) {
         MemberMission memberMission = MemberMission.builder()
                 .status(MissionStatus.CHALLENGING)
                 .build();

@@ -1,6 +1,10 @@
 package umc.spring.web.dto;
 
 import lombok.Getter;
+import umc.spring.validation.annotation.ExistMembers;
+import umc.spring.validation.annotation.ExistMissions;
+import umc.spring.validation.annotation.ExistRegion;
+import umc.spring.validation.annotation.ExistStores;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -19,6 +23,8 @@ public class StoreRequestDTO {
         @NotNull
         Float score;
         List<Long> reviewList;
+        @ExistRegion
+        Long regionId;
     }
 
     @Getter
@@ -29,6 +35,10 @@ public class StoreRequestDTO {
         Float score;
         @NotBlank
         String content;
+        @ExistStores
+        Long storeId;
+        @ExistMembers
+        Long memberId;
     }
 
     @Getter
@@ -41,11 +51,7 @@ public class StoreRequestDTO {
         private LocalDate deadline;
         @NotNull
         private String missionSpec;
-    }
-
-    @Getter
-    public static class ChallengeMissionDTO{
-        @NotBlank
-        Long id;
+        @ExistStores
+        Long storeId;
     }
 }
