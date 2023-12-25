@@ -35,10 +35,6 @@ public class StoreRequestDTO {
         Float score;
         @NotBlank
         String content;
-        @ExistStores
-        Long storeId;
-        @ExistMembers
-        Long memberId;
     }
 
     @Getter
