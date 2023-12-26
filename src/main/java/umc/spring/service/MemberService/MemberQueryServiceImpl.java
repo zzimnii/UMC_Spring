@@ -6,11 +6,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.domain.Member;
+import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
-import umc.spring.domain.Store;
-import umc.spring.repository.MemberRepository;
-import umc.spring.repository.ReviewRepository;
-import umc.spring.repository.StoreRepository;
+import umc.spring.domain.enums.MissionStatus;
+import umc.spring.domain.mapping.MemberMission;
+import umc.spring.repository.*;
 
 import java.util.Optional;
 
@@ -20,8 +20,9 @@ import java.util.Optional;
 public class MemberQueryServiceImpl implements MemberQueryService {
 
     private final MemberRepository memberRepository;
-    private final StoreRepository storeRepository;
+    private final MemberMissionRepository memberMissionRepository;
     private final ReviewRepository reviewRepository;
+    private final MissionRepository missionRepository;
 
     @Override
     public Optional<Member> findMember(Long id) {
@@ -29,11 +30,27 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     }
 
     @Override
+    public Optional<MemberMission> findMemberMissionByMemberAndMission(Long memberId, Long missionId) {
+        Optional<Member> member = findMember(memberId);
+        Optional<Mission> mission = missionRepository.findById(missionId);
+
+        return memberMissionRepository.findMemberMissionByMemberAndMission(member.get(), mission.get());
+    }
+
+    @Override
     public Page<Review> getMyReviewList(Long MemberId, Integer page) {
-        Member member = memberRepository.findById(MemberId).get();
+        Member member = findMember(MemberId).get();
 
         Page<Review> MemberPage = reviewRepository.findAllByMember(member, PageRequest.of(page, 10));
 
+        return MemberPage;
+    }
+
+    @Override
+    public Page<MemberMission> getMyChallengeMissionList(Long MemberId, Integer page) {
+        Member member = memberRepository.findById(MemberId).get();
+
+        Page<MemberMission> MemberPage = memberMissionRepository.findAllByMemberAndStatus(member, MissionStatus.CHALLENGING ,PageRequest.of(page, 10));
         return MemberPage;
     }
 }

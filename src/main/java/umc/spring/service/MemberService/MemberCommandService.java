@@ -9,4 +9,6 @@ public interface MemberCommandService {
     Member joinMember(MemberRequestDTO.JoinDto request);
 
     MemberMission createMemberMission(Long missionId, Long memberId, MemberRequestDTO.ChallengeMissionDto request);
+
+    MemberMission completeMemberMission(Long missionId, Long memberId, MemberRequestDTO.ChallengeMissionDto request);
 }

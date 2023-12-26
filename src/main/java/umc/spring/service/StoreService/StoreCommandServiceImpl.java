@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.converter.StoreConverter;
-import umc.spring.converter.StoreMissionConverter;
-import umc.spring.converter.StoreReviewConverter;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
 import umc.spring.domain.Store;
@@ -35,7 +33,7 @@ public class StoreCommandServiceImpl implements StoreCommandService {
 
     @Override
     public Review createReview(Long memberId, Long storeId, StoreRequestDTO.ReviewDto request) {
-        Review newReview = StoreReviewConverter.toReview(request);
+        Review newReview = StoreConverter.toReview(request);
 
         newReview.setMember(memberRepository.findById(memberId).get());
         newReview.setStore(storeRepository.findById(storeId).get());
@@ -45,7 +43,7 @@ public class StoreCommandServiceImpl implements StoreCommandService {
 
     @Override
     public Mission createMission(Long storeId, StoreRequestDTO.MissionDto request) {
-        Mission newMission = StoreMissionConverter.toMission(request);
+        Mission newMission = StoreConverter.toMission(request);
 
         newMission.setStore(storeRepository.findById(storeId).get());
 

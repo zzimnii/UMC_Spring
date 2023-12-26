@@ -23,8 +23,6 @@ public class StoreRequestDTO {
         @NotNull
         Float score;
         List<Long> reviewList;
-        @ExistRegion
-        Long regionId;
     }
 
     @Getter
@@ -40,14 +38,12 @@ public class StoreRequestDTO {
     @Getter
     public static class MissionDto{
         @NotNull
-        private Integer reward;
+        Integer reward;
         @NotNull
-        private Integer price;
+        Integer price;
         @NotNull
-        private LocalDate deadline;
+        LocalDate deadline;
         @NotNull
-        private String missionSpec;
-        @ExistStores
-        Long storeId;
+        String missionSpec;
     }
 }

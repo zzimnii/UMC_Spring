@@ -59,4 +59,14 @@ public class MemberCommandServiceImpl implements MemberCommandService {
         memberMission.setMission(missionRepository.findById(missionId).get());
         return memberMissionRepository.save(memberMission);
     }
+
+    @Override
+    public MemberMission completeMemberMission(Long missionId, Long memberId, MemberRequestDTO.ChallengeMissionDto request) {
+        MemberMission memberMission = MemberMission.builder()
+                .status(MissionStatus.COMPLETE)
+                .build();
+        memberMission.setMember(memberRepository.findById(memberId).get());
+        memberMission.setMission(missionRepository.findById(missionId).get());
+        return memberMissionRepository.save(memberMission);
+    }
 }
