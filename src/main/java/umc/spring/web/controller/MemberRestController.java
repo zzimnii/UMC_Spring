@@ -51,10 +51,11 @@ public class MemberRestController {
     }
 
     @PostMapping("/mission/{missionId}/complete")
-    public ApiResponse<MemberResponseDTO.MemberMissionResultDTO> ComplteMemberMission(@RequestBody @Valid MemberRequestDTO.ChallengeMissionDto request,
+    public ApiResponse<MemberResponseDTO.MemberMissionResultDTO> ComplteMemberMission(@RequestBody @Valid MemberRequestDTO.CompleteMissionDto request,
                                                                                  @ExistMissions @RequestParam(name = "missionId") Long missionId,
-                                                                                 @ExistMembers @RequestParam(name = "memberId") Long memberId){
-        MemberMission memberMission = memberCommandService.completeMemberMission(missionId, memberId, request);
+                                                                                 @ExistMembers @RequestParam(name = "memberId") Long memberId,
+                                                                                      @RequestParam(name = "memberMissionId") Long memberMissionId){
+        MemberMission memberMission = memberCommandService.completeMemberMission(missionId, memberId, memberMissionId, request);
         return ApiResponse.onSuccess(MemberConverter.toCreateMemberMissionResultDTO(memberMission));
     }
 

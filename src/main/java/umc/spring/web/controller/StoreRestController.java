@@ -44,7 +44,7 @@ public class StoreRestController {
     public ApiResponse<StoreResponseDTO.ReviewResultDTO> review(@RequestBody @Valid StoreRequestDTO.ReviewDto request ,
                                                                 @ExistStores @PathVariable(name = "storeId") Long storeId,
                                                                 @ExistMembers @RequestParam(name = "memberId") Long memberId) {
-        Review review = storeCommandService.createReview(storeId, memberId, request);
+        Review review = storeCommandService.createReview(memberId, storeId, request);
         return ApiResponse.onSuccess(StoreConverter.reviewResultDTO(review));
     }
 
@@ -60,14 +60,14 @@ public class StoreRestController {
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!"),
             @Parameter(name = "page", description = "페이지 번호, 0번이 1 페이지 입니다."),
     })
-    public ApiResponse<StoreResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistStores @PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam(name = "page") Integer page){
+    public ApiResponse<StoreResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistStores @Valid @PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam(name = "page") Integer page){
         Page<Review> reviews = storeQueryService.getReviewList(storeId,page);
         return ApiResponse.onSuccess(StoreConverter.reviewPreViewListDTO(reviews));
     }
 
     @PostMapping("{storeId}/missions")
     public ApiResponse<StoreResponseDTO.MissionResultDTO> mission(@RequestBody @Valid StoreRequestDTO.MissionDto request,
-                                                                  @ExistStores @PathVariable(name = "storeId") Long storeId) {
+                                                                  @ExistStores @Valid @PathVariable(name = "storeId") Long storeId) {
         Mission mission = storeCommandService.createMission(storeId, request);
         return ApiResponse.onSuccess(StoreConverter.missionResultDTO(mission));
     }

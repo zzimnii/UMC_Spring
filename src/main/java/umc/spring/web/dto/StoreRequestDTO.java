@@ -7,6 +7,7 @@ import umc.spring.validation.annotation.ExistRegion;
 import umc.spring.validation.annotation.ExistStores;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -43,7 +44,8 @@ public class StoreRequestDTO {
         Integer price;
         @NotNull
         LocalDate deadline;
-        @NotNull
+        @NotEmpty
         String missionSpec;
     }
+
 }

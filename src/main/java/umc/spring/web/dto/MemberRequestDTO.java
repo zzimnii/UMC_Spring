@@ -41,4 +41,13 @@ public class MemberRequestDTO {
         @ExistMissions
         Long missionId;
     }
+
+    @Getter
+    public static class CompleteMissionDto{
+        @ExistMembers
+        Long memberId;
+        @ExistMissions
+        Long missionId;
+        Long memberMissionId;
+    }
 }

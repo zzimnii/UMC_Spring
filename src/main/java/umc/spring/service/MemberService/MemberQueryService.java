@@ -11,8 +11,6 @@ import java.util.Optional;
 public interface MemberQueryService {
     Optional<Member> findMember(Long id);
 
-    Optional<MemberMission> findMemberMissionByMemberAndMission(Long memberId, Long missionId);
-
     Page<Review> getMyReviewList(Long memberId, Integer page);
 
     Page<MemberMission> getMyChallengeMissionList(Long memberId, Integer page);

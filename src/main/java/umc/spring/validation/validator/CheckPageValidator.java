@@ -13,16 +13,16 @@ import javax.validation.ConstraintValidatorContext;
 @RequiredArgsConstructor
 public class CheckPageValidator implements ConstraintValidator<CheckPage, Integer> {
 
-    private final StoreQueryService storeQueryService;
 
     @Override
     public void initialize(CheckPage constraintAnnotation) {
+        System.out.println("validator initialize");
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext context) {
-
+        System.out.println("validator isValid");
         if (value < 0){
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(ErrorStatus.INVALID_PAGE.toString()).addConstraintViolation();

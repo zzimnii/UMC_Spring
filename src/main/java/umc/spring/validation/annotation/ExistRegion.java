@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = RegionsExistValidator.class)
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExistRegion {
 

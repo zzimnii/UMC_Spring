@@ -19,6 +19,7 @@ import umc.spring.repository.MissionRepository;
 import umc.spring.web.dto.MemberRequestDTO;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,13 +61,14 @@ public class MemberCommandServiceImpl implements MemberCommandService {
         return memberMissionRepository.save(memberMission);
     }
 
+
     @Override
-    public MemberMission completeMemberMission(Long missionId, Long memberId, MemberRequestDTO.ChallengeMissionDto request) {
+    public MemberMission completeMemberMission(Long missionId, Long memberId, Long memberMissionId, MemberRequestDTO.CompleteMissionDto request) {
         MemberMission memberMission = MemberMission.builder()
-                .status(MissionStatus.COMPLETE)
                 .build();
         memberMission.setMember(memberRepository.findById(memberId).get());
         memberMission.setMission(missionRepository.findById(missionId).get());
+        memberMission.setStatus(MissionStatus.COMPLETE);
         return memberMissionRepository.save(memberMission);
     }
 }

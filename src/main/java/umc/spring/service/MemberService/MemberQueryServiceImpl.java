@@ -30,14 +30,6 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     }
 
     @Override
-    public Optional<MemberMission> findMemberMissionByMemberAndMission(Long memberId, Long missionId) {
-        Optional<Member> member = findMember(memberId);
-        Optional<Mission> mission = missionRepository.findById(missionId);
-
-        return memberMissionRepository.findMemberMissionByMemberAndMission(member.get(), mission.get());
-    }
-
-    @Override
     public Page<Review> getMyReviewList(Long MemberId, Integer page) {
         Member member = findMember(MemberId).get();
 
